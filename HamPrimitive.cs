@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 
-namespace Hamester.Serealization;
+namespace Hamester.Serialization.Ham;
+
 
 internal readonly struct HamPrimitive<T> : IHamElement
 {

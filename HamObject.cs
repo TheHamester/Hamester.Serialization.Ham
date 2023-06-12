@@ -3,7 +3,8 @@ using System.IO;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Hamester.Serealization;
+namespace Hamester.Serialization.Ham;
+
 
 public class HamObject : IHamElement
 {

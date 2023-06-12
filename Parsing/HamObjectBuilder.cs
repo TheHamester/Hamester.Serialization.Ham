@@ -1,6 +1,6 @@
-﻿using Hamester.Serealization.Parsing.AST;
+﻿using Hamester.Serialization.Ham.Parsing.AST;
 
-namespace Hamester.Serealization.Parsing;
+namespace Hamester.Serialization.Ham.Parsing;
 
 internal class HamObjectBuilder
 {

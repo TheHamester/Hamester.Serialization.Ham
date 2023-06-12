@@ -1,4 +1,5 @@
-﻿namespace Hamester.Serealization;
+﻿namespace Hamester.Serialization.Ham;
+
 
 public static class HamArrayFactory
 {

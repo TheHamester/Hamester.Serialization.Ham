@@ -1,4 +1,4 @@
-﻿namespace Hamester.Serealization;
+﻿namespace Hamester.Serialization.Ham;
 
 public interface IHamElement
 {

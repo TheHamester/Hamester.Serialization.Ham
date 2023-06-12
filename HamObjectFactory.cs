@@ -1,6 +1,7 @@
-﻿using Hamester.Serealization.Parsing;
+﻿using Hamester.Serialization.Ham.Parsing;
 
-namespace Hamester.Serealization;
+namespace Hamester.Serialization.Ham;
+
 
 public static class HamObjectFactory
 {

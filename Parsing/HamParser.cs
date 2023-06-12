@@ -1,7 +1,7 @@
-﻿using Hamester.Serealization.Parsing.AST;
-using Hamester.Serealization.Parsing.Exceptions;
+﻿using Hamester.Serialization.Ham.Parsing.AST;
+using Hamester.Serialization.Ham.Parsing.Exceptions;
 
-namespace Hamester.Serealization.Parsing;
+namespace Hamester.Serialization.Ham.Parsing;
 
 
 internal class HamParser

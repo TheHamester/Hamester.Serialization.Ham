@@ -1,6 +1,6 @@
-﻿using Hamester.Serealization.Parsing.Exceptions;
+﻿using Hamester.Serialization.Ham.Parsing.Exceptions;
 
-namespace Hamester.Serealization.Parsing;
+namespace Hamester.Serialization.Ham.Parsing;
 
 internal enum HamTokenType
 {

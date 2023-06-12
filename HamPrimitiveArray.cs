@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 
-namespace Hamester.Serealization;
+namespace Hamester.Serialization.Ham;
+
 
 public class HamPrimitiveArray<T> : IHamElement, IHamCollection<T, HamPrimitiveArray<T>>, IHamArray, IEnumerable<T>, IEnumerable
 {

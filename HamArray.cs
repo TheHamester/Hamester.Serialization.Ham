@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Collections;
 
-namespace Hamester.Serealization;
+namespace Hamester.Serialization.Ham;
 
 public interface IHamArray { }
 

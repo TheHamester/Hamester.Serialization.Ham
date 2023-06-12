@@ -1,4 +1,4 @@
-﻿namespace Hamester.Serealization;
+﻿namespace Hamester.Serialization.Ham;
 
 internal interface IHamCollection<T, TSelf> where TSelf : IHamCollection<T, TSelf>
 {
