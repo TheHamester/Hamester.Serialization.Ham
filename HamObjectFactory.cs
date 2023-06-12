@@ -4,7 +4,8 @@ namespace Hamester.Serealization;
 
 public static class HamObjectFactory
 {
-    private static HamObjectBuilder? _builder = null;
+    private static volatile HamObjectBuilder? _builder = null;
+    private static readonly object _sync_lock = new();
 
     public static HamObject? FromString(string hamText)
         => GetBuilderInstance().BuildObject(hamText);
@@ -25,8 +26,18 @@ public static class HamObjectFactory
 
         return GetBuilderInstance().BuildObject(hamText);
     }
-    
 
-    private static HamObjectBuilder GetBuilderInstance() 
-        => _builder ??= new();
+
+    private static HamObjectBuilder GetBuilderInstance()
+    {
+        if (_builder is null)
+        {
+            lock (_sync_lock)
+            {
+                _builder ??= new();
+            }
+        }
+
+        return _builder;
+    }
 }
