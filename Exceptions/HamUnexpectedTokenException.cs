@@ -1,4 +1,6 @@
-﻿namespace Hamester.Serialization.Ham.Parsing.Exceptions;
+﻿using Hamester.Serialization.Ham.Parsing;
+
+namespace Hamester.Serialization.Ham.Exceptions;
 
 internal class HamUnexpectedTokenException : Exception
 {

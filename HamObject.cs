@@ -1,7 +1,5 @@
-﻿using System.Globalization;
-using System.IO;
+﻿using Hamester.Serialization.Ham.Exceptions;
 using System.Text;
-using System.Xml.Linq;
 
 namespace Hamester.Serialization.Ham;
 
@@ -18,10 +16,10 @@ public class HamObject : IHamElement
 
     public override string ToString() => Stringify();
 
-    public bool SaveToFile(string directoryPath, string name, bool prettify)
+    public HamResult SaveToFile(string directoryPath, string name, bool prettify)
         => SaveToFile(Path.Combine(directoryPath, name), prettify);
 
-    public bool SaveToFile(string fileName, bool prettify)
+    public HamResult SaveToFile(string fileName, bool prettify)
     {
         string path = $"{fileName}.ham";
         string content = prettify ? StringifyPretty() : Stringify();
@@ -30,12 +28,12 @@ public class HamObject : IHamElement
         {
             File.WriteAllText(path, content);
         }
-        catch (Exception)
+        catch (Exception ex) when (ExceptionTypes.IsFileError(ex))
         {
-            return false;
+            return new(ex);
         }
 
-        return true;
+        return new();
     }
 
     public string Stringify(string? key = null)

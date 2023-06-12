@@ -1,4 +1,4 @@
-﻿using Hamester.Serialization.Ham.Parsing.Exceptions;
+﻿using Hamester.Serialization.Ham.Exceptions;
 
 namespace Hamester.Serialization.Ham.Parsing;
 
@@ -22,7 +22,6 @@ internal enum HamTokenType
     Semicolon
 }
 
-
 internal class HamLexer
 {
     private const string LatinAlphabet = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
@@ -44,7 +43,7 @@ internal class HamLexer
 
         while(_currentIndex < _hamText.Length)
         {
-            if (_hamText[_currentIndex] is ' ' or '\n' or '\r' or '\t') 
+            if (Whitespaces.All.Contains(_hamText[_currentIndex])) 
             {
                 _currentIndex++;
                 continue;

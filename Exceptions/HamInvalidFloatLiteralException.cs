@@ -1,4 +1,4 @@
-﻿namespace Hamester.Serialization.Ham.Parsing.Exceptions;
+﻿namespace Hamester.Serialization.Ham.Exceptions;
 
 internal class HamInvalidFloatLiteralException : Exception
 {

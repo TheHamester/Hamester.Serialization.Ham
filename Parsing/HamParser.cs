@@ -1,5 +1,5 @@
 ﻿using Hamester.Serialization.Ham.Parsing.AST;
-using Hamester.Serialization.Ham.Parsing.Exceptions;
+using Hamester.Serialization.Ham.Exceptions;
 
 namespace Hamester.Serialization.Ham.Parsing;
 

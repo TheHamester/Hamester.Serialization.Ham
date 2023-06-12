@@ -1,38 +1,40 @@
 ﻿using Hamester.Serialization.Ham.Parsing.AST;
+using Hamester.Serialization.Ham.Exceptions;
+using System.Diagnostics;
 
 namespace Hamester.Serialization.Ham.Parsing;
 
-internal class HamObjectBuilder
+internal class HamObjectCreator
 {
     private readonly HamParser _parser;
 
-    public HamObjectBuilder()
+    public HamObjectCreator()
         => _parser = new();
 
-    public HamObject? BuildObject(string hamText)
+    public HamParseResult BuildObject(string hamText)
     {
         HamElementAST ast;
         try
         {
             ast = _parser.Parse(hamText);
         }
-        catch(Exception) 
+        catch(Exception ex) when (ExceptionTypes.IsParsingError(ex)) 
         {
-            return null;
+            return new(ex);
         }
 
 
-        return BuildObject((ObjectElementAST)ast); 
+        return new(CreateObject((ObjectElementAST)ast)); 
     }
 
-    private HamObject BuildObject(ObjectElementAST objectElement)
+    private HamObject CreateObject(ObjectElementAST objectElement)
     {
         HamObject obj = new();
         foreach (var el in objectElement.Elements)
         {
             if (el is ObjectElementAST objectElement1)
             {
-                obj.AddObject(objectElement1.Identifier, BuildObject(objectElement1));
+                obj.AddObject(objectElement1.Identifier, CreateObject(objectElement1));
                 continue;
             }
 
@@ -70,7 +72,7 @@ internal class HamObjectBuilder
                 case HamType.Double:  hamObject.AddArray(arrayElement.Identifier, CollectPrimitiveArrayElements(arrayElement.Elements, Convert.ToDouble).ToHamArray()); break;
                 case HamType.Float:   hamObject.AddArray(arrayElement.Identifier, CollectPrimitiveArrayElements(arrayElement.Elements, Convert.ToSingle).ToHamArray()); break;
                 case HamType.Boolean: hamObject.AddArray(arrayElement.Identifier, CollectPrimitiveArrayElements(arrayElement.Elements, x => x is "True").ToHamArray()); break;
-                default: throw new ArgumentException($"Invalid HamType {arrayElement.Type}", nameof(arrayElement.Type));
+                default: throw new UnreachableException();
             }
 
             return;
@@ -96,7 +98,7 @@ internal class HamObjectBuilder
             case HamType.Float:   AddPrimitive(primitiveElement, hamObject.AddFloat,   x => Convert.ToSingle(x.Replace('.', ',')));  break;
             case HamType.Double:  AddPrimitive(primitiveElement, hamObject.AddDouble,  x => Convert.ToDouble(x.Replace('.', ',')));  break;
             case HamType.Boolean: AddPrimitive(primitiveElement, hamObject.AddBoolean, x => x is "True");                            break;
-            default: throw new ArgumentException($"Invalid HamType {primitiveElement.Type}", nameof(primitiveElement.Type));
+            default: throw new UnreachableException();
         }
     }
 
@@ -116,7 +118,7 @@ internal class HamObjectBuilder
     {
         List<HamObject> list = new();
         foreach (var el in arrayElement)
-            list.Add(BuildObject((ObjectElementAST)el));
+            list.Add(CreateObject((ObjectElementAST)el));
 
         return list;
     }
